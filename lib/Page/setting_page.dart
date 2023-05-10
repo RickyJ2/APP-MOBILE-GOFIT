@@ -115,7 +115,16 @@ class SettingPage extends StatelessWidget {
             state.user.role == 1 || state.user.role == 2
                 ? CreateListTileSetting(
                     leading: const Icon(Icons.lock),
-                    title: "Change Password",
+                    title: "Ubah Password",
+                    onTap: () {
+                      context.push('/change-password');
+                    },
+                  )
+                : const SizedBox(),
+            state.user.role == 1
+                ? CreateListTileSetting(
+                    leading: const Icon(Icons.article),
+                    title: "Izin Kelas",
                     onTap: () {
                       context.push('/change-password');
                     },

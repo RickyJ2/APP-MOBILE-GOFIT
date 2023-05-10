@@ -34,9 +34,14 @@ class _BotttomNavigationBarPageState extends State<BotttomNavigationBarPage> {
         return SafeArea(
           child: Scaffold(
             body: SingleChildScrollView(
-              child: Padding(
+              child: Container(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 24.0),
+                  horizontal: 16.0,
+                  vertical: 24.0,
+                ),
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height - 56.0,
+                ),
                 child: widget.mainPageContent,
               ),
             ),

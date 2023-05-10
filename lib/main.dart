@@ -7,8 +7,10 @@ import 'Bloc/AppBloc/app_event.dart';
 import 'Repository/informasi_umum_repository.dart';
 import 'Repository/login_repository.dart';
 import 'const.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
+  initializeDateFormatting('id', null);
   runApp(const MainApp());
 }
 

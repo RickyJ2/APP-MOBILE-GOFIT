@@ -10,6 +10,7 @@ class JadwalHarian extends Equatable {
   final String tanggal;
   final String status;
   final String instrukturPenganti;
+  final int count;
 
   JadwalHarian copyWith({
     String? id,
@@ -17,6 +18,7 @@ class JadwalHarian extends Equatable {
     String? tanggal,
     String? status,
     String? instrukturPenganti,
+    int? count,
   }) {
     return JadwalHarian(
       id: id ?? this.id,
@@ -24,6 +26,7 @@ class JadwalHarian extends Equatable {
       tanggal: tanggal ?? this.tanggal,
       status: status ?? this.status,
       instrukturPenganti: instrukturPenganti ?? this.instrukturPenganti,
+      count: count ?? this.count,
     );
   }
 
@@ -33,6 +36,7 @@ class JadwalHarian extends Equatable {
     this.tanggal = '',
     this.status = '',
     this.instrukturPenganti = '',
+    this.count = 0,
   });
 
   factory JadwalHarian.createJadwalHarian(Map<String, dynamic> object) {
@@ -41,6 +45,7 @@ class JadwalHarian extends Equatable {
       jadwalUmum: JadwalUmum(
         kelas: Kelas(
           nama: object['nama_kelas'].toString(),
+          harga: object['harga_kelas'].toString(),
         ),
         instruktur: Instruktur(
           nama: object['nama_instruktur'].toString(),
@@ -51,6 +56,7 @@ class JadwalHarian extends Equatable {
       tanggal: object['tanggal'].toString(),
       status: object['jenis_status'],
       instrukturPenganti: object['instruktur_penganti'],
+      count: object['total_bookings'],
     );
   }
 
@@ -60,6 +66,7 @@ class JadwalHarian extends Equatable {
     tanggal: '',
     status: '',
     instrukturPenganti: '',
+    count: 0,
   );
 
   bool get isEmpty => this == JadwalHarian.empty;
@@ -72,5 +79,6 @@ class JadwalHarian extends Equatable {
         tanggal,
         status,
         instrukturPenganti,
+        count,
       ];
 }

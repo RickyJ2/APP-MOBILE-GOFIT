@@ -1,6 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobile_gofit/Model/jadwal_harian.dart';
+import 'package:mobile_gofit/Page/booking_kelas_gym_page.dart';
+import 'package:mobile_gofit/Page/booking_kelas_list_page.dart';
+import 'package:mobile_gofit/Page/booking_kelas_page.dart';
 import 'package:mobile_gofit/Page/change_password_page.dart';
+import 'package:mobile_gofit/Page/home_instruktur_page.dart';
 import 'package:mobile_gofit/Page/setting_page.dart';
 import 'Bloc/AppBloc/app_bloc.dart';
 import 'Page/bottom_navigation_bar.dart';
@@ -21,7 +26,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/home-instruktur',
       builder: (context, state) => const BotttomNavigationBarPage(
-          mainPageContent: HomeMemberPage(), selectedIndex: 0),
+          mainPageContent: HomeInstrukturPage(), selectedIndex: 0),
     ),
     GoRoute(
       path: '/home-MO',
@@ -42,6 +47,18 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/change-password',
       builder: (context, state) => const ChangePasswordPage(),
+    ),
+    GoRoute(
+      path: '/booking-kelas',
+      builder: (context, state) => BookingKelasGymPage(
+        mainPageContent: BookingKelasPage(
+            jadwalHarianSelected:
+                (state.extra ?? JadwalHarian.empty) as JadwalHarian),
+      ),
+    ),
+    GoRoute(
+      path: '/booking-kelas-list',
+      builder: (context, state) => const BookingKelasListPage(),
     ),
   ],
   initialLocation: '/login',

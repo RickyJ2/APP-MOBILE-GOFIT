@@ -45,24 +45,20 @@ class ChangePasswordPage extends StatelessWidget {
         },
         child: SafeArea(
           child: Scaffold(
+            appBar: AppBar(
+              title: const Text("Ubah Password"),
+              foregroundColor: textColor,
+              elevation: 0,
+            ),
             body: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Ubah Password',
-                    style: TextStyle(
-                      fontFamily: 'SchibstedGrotesk',
-                      color: primaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  const ChangePasswordForm(),
+                children: const [
+                  SizedBox(height: 20),
+                  ChangePasswordForm(),
                 ],
               ),
             ),
@@ -148,7 +144,7 @@ class NewPasswordTextFormField extends StatelessWidget {
         builder: (context, state) {
       return TextFormField(
         decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.lock),
+          prefixIcon: const Icon(Icons.enhanced_encryption),
           labelText: 'Password Baru',
           suffixIcon: IconButton(
             onPressed: () {
