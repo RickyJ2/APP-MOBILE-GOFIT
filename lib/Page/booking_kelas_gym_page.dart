@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_gofit/Bloc/BookingKelasGymBloc/booking_kelas_gym_bloc.dart';
 import 'package:mobile_gofit/Bloc/BookingKelasGymBloc/booking_kelas_gym_state.dart';
+import 'package:mobile_gofit/Page/booking_gym_page.dart';
+import 'package:mobile_gofit/Page/booking_kelas_page.dart';
 
 import '../Bloc/BookingKelasGymBloc/booking_kelas_gym_event.dart';
+import '../Model/jadwal_harian.dart';
 import '../const.dart';
 
 class BookingKelasGymPage extends StatelessWidget {
-  final Widget mainPageContent;
-  const BookingKelasGymPage({super.key, required this.mainPageContent});
+  final int gymKelas;
+  final JadwalHarian jadwalHarianSelected;
+  const BookingKelasGymPage(
+      {super.key,
+      this.jadwalHarianSelected = JadwalHarian.empty,
+      required this.gymKelas});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,8 @@ class BookingKelasGymPage extends StatelessWidget {
               horizontal: 16.0,
               vertical: 24.0,
             ),
-            child: BookingKelasGymView(mainPageContent: mainPageContent),
+            child: BookingKelasGymView(
+                jadwalHarianSelected: jadwalHarianSelected, gymKelas: gymKelas),
           ),
         ),
       ),
@@ -35,9 +43,24 @@ class BookingKelasGymPage extends StatelessWidget {
   }
 }
 
-class BookingKelasGymView extends StatelessWidget {
-  final Widget mainPageContent;
-  const BookingKelasGymView({super.key, required this.mainPageContent});
+class BookingKelasGymView extends StatefulWidget {
+  final int gymKelas;
+  final JadwalHarian jadwalHarianSelected;
+  const BookingKelasGymView(
+      {super.key, required this.jadwalHarianSelected, required this.gymKelas});
+
+  @override
+  State<BookingKelasGymView> createState() => _BookingKelasGymViewState();
+}
+
+class _BookingKelasGymViewState extends State<BookingKelasGymView> {
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<BookingKelasGymBloc>()
+        .add(BookingKelasGymToogleChanged(toogleState: widget.gymKelas));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +93,13 @@ class BookingKelasGymView extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 30.0),
-          Expanded(child: mainPageContent),
+          Expanded(
+            child: state.toogleState[0]
+                ? const BookingGymPage()
+                : BookingKelasPage(
+                    jadwalHarianSelected: widget.jadwalHarianSelected,
+                  ),
+          ),
         ],
       );
     });

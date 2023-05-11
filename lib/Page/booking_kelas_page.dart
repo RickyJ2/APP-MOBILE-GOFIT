@@ -79,8 +79,12 @@ class _BookingKelasViewState extends State<BookingKelasView> {
               const SizedBox(height: 20.0),
               state.jadwalHarian.isEmpty
                   ? OutlinedButton(
-                      onPressed: () {
-                        context.push('/booking-kelas-list');
+                      onPressed: () async {
+                        context.read<BookingKelasBloc>().add(
+                            BookingKelasJadwalHarianChanged(
+                                jadwalHarian:
+                                    (await context.push('/booking-kelas-list')
+                                        as JadwalHarian)));
                       },
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobile_gofit/Model/instruktur.dart';
 import 'package:mobile_gofit/Model/jadwal_umum.dart';
@@ -58,7 +57,6 @@ class IzinInstrukturRepository {
         'keterangan': izinInstruktur.keterangan,
       },
     );
-    debugPrint(response.body);
     if (response.statusCode == 200) {
       return;
     } else if (response.statusCode == 400) {

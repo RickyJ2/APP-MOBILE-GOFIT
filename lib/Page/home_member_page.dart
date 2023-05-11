@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile_gofit/Model/jadwal_harian.dart';
 import 'package:mobile_gofit/Repository/jadwal_harian_repository.dart';
 import 'package:mobile_gofit/StateBlocTemplate/page_fetched_data_state.dart';
 
@@ -100,7 +101,12 @@ class _HomeMemberViewState extends State<HomeMemberView> {
                     ),
                     const SizedBox(height: 16.0),
                     OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push('/booking-gym-kelas', extra: {
+                          'jadwalHarianSelected': JadwalHarian.empty,
+                          'gymKelas': 0,
+                        });
+                      },
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(
                           color: primaryColor,
@@ -172,7 +178,10 @@ class ListJadwalHarianCard extends StatelessWidget {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          context.push('/booking-kelas', extra: item);
+                          context.push('/booking-gym-kelas', extra: {
+                            'jadwalHarianSelected': item,
+                            'gymKelas': 1,
+                          });
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(

@@ -55,7 +55,7 @@ class _BookingKelasListViewState extends State<BookingKelasListView> {
               .map(
                 (item) => TextButton(
                   onPressed: () {
-                    context.push('/booking-kelas', extra: item);
+                    Navigator.pop(context, item);
                   },
                   child: CardJadwalHarian(
                     jadwalHarian: item,

@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_gofit/Model/jadwal_harian.dart';
 import 'package:mobile_gofit/Page/booking_kelas_gym_page.dart';
 import 'package:mobile_gofit/Page/booking_kelas_list_page.dart';
-import 'package:mobile_gofit/Page/booking_kelas_page.dart';
 import 'package:mobile_gofit/Page/change_password_page.dart';
 import 'package:mobile_gofit/Page/home_instruktur_page.dart';
 import 'package:mobile_gofit/Page/izin_instruktur_page.dart';
@@ -51,11 +50,12 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const ChangePasswordPage(),
     ),
     GoRoute(
-      path: '/booking-kelas',
+      path: '/booking-gym-kelas',
       builder: (context, state) => BookingKelasGymPage(
-        mainPageContent: BookingKelasPage(
-            jadwalHarianSelected:
-                (state.extra ?? JadwalHarian.empty) as JadwalHarian),
+        jadwalHarianSelected:
+            ((state.extra as Map<String, dynamic>)['jadwalHarianSelected'] ??
+                JadwalHarian.empty) as JadwalHarian,
+        gymKelas: ((state.extra as Map<String, dynamic>)['gymKelas'] as int),
       ),
     ),
     GoRoute(

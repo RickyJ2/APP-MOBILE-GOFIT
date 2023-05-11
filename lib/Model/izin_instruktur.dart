@@ -61,6 +61,7 @@ class IzinInstruktur extends Equatable {
           Instruktur(nama: object['instruktur_penganti'].toString()),
       jadwalUmum: JadwalUmum(
         id: object['jadwal_umum_id'].toString(),
+        hari: object['hari'].toString(),
         jamMulai: object['jam_mulai'].toString(),
       ),
       tanggalIzin: object['tanggal_izin'].toString(),
