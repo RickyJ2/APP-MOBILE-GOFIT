@@ -126,7 +126,7 @@ class SettingPage extends StatelessWidget {
                     leading: const Icon(Icons.article),
                     title: "Izin Kelas",
                     onTap: () {
-                      context.push('/change-password');
+                      context.push('/izin-instruktur');
                     },
                   )
                 : const SizedBox(),

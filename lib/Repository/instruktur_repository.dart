@@ -37,6 +37,21 @@ class InstrukturRepository {
     }
   }
 
+  Future<List<Instruktur>> getFiltered() async {
+    var token = await TokenBearer().get();
+    var url = Uri.parse('${uri}instruktur/indexFiltered');
+    var response =
+        await http.get(url, headers: {'Authorization': 'Bearer $token'});
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body)['data'] as List;
+      List<Instruktur> instruktur =
+          data.map((e) => Instruktur.createInstruktur(e)).toList();
+      return instruktur;
+    } else {
+      throw FailedToLoadInstruktur('Failed to load instruktur');
+    }
+  }
+
   Future<void> register(Instruktur instruktur) async {
     var token = await TokenBearer().get();
     var url = Uri.parse('${uri}instruktur/register');

@@ -18,6 +18,7 @@ class CreateTextFormField extends StatelessWidget {
   final void Function()? onTap;
   final Widget? prefix;
   final bool? enabled;
+  final int? maxLines;
 
   const CreateTextFormField({
     super.key,
@@ -35,6 +36,7 @@ class CreateTextFormField extends StatelessWidget {
     this.onTap,
     this.enabled,
     this.prefix,
+    this.maxLines,
   });
 
   @override
@@ -71,6 +73,7 @@ class CreateTextFormField extends StatelessWidget {
       onTap: onTap,
       obscureText: obscureText ?? false,
       enabled: enabled ?? true,
+      maxLines: maxLines ?? 1,
     );
   }
 }

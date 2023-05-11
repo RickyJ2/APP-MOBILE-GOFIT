@@ -6,6 +6,8 @@ import 'package:mobile_gofit/Page/booking_kelas_list_page.dart';
 import 'package:mobile_gofit/Page/booking_kelas_page.dart';
 import 'package:mobile_gofit/Page/change_password_page.dart';
 import 'package:mobile_gofit/Page/home_instruktur_page.dart';
+import 'package:mobile_gofit/Page/izin_instruktur_page.dart';
+import 'package:mobile_gofit/Page/izin_instruktur_tambah_page.dart';
 import 'package:mobile_gofit/Page/setting_page.dart';
 import 'Bloc/AppBloc/app_bloc.dart';
 import 'Page/bottom_navigation_bar.dart';
@@ -60,6 +62,13 @@ final GoRouter router = GoRouter(
       path: '/booking-kelas-list',
       builder: (context, state) => const BookingKelasListPage(),
     ),
+    GoRoute(
+        path: '/izin-instruktur',
+        builder: (context, state) => const IzinInstrukturPage()),
+    GoRoute(
+      path: '/izin-instruktur/tambah',
+      builder: (context, state) => const IzinInstrukturTambahPage(),
+    )
   ],
   initialLocation: '/login',
 );

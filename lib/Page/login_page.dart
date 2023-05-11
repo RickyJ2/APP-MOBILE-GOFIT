@@ -89,43 +89,46 @@ class LoginView extends StatelessWidget {
         child: Scaffold(
           body: BlocBuilder<LoginBloc, LoginState>(
             builder: (context, state) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'GoFit',
-                    style: TextStyle(
-                      fontFamily: 'SchibstedGrotesk',
-                      color: primaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 50,
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'GoFit',
+                      style: TextStyle(
+                        fontFamily: 'SchibstedGrotesk',
+                        color: primaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 50,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    'Selamat Datang!',
-                    style: TextStyle(
-                      fontFamily: 'roboto',
-                      color: accentColor,
-                      fontSize: 28,
+                    const SizedBox(height: 20),
+                    Text(
+                      'Selamat Datang!',
+                      style: TextStyle(
+                        fontFamily: 'roboto',
+                        color: accentColor,
+                        fontSize: 28,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Log in untuk melanjutkan',
-                    style: TextStyle(
-                      fontFamily: 'roboto',
-                      color: textColorSecond,
-                      fontSize: 16,
+                    const SizedBox(height: 10),
+                    Text(
+                      'Log in untuk melanjutkan',
+                      style: TextStyle(
+                        fontFamily: 'roboto',
+                        color: textColorSecond,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 30),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                    child: LoginForm(),
-                  ),
-                ],
+                    const SizedBox(height: 30),
+                    const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      child: LoginForm(),
+                    ),
+                  ],
+                ),
               );
             },
           ),
