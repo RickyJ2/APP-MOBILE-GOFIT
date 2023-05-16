@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_gofit/Asset/create_text_form_field.dart';
 import 'package:mobile_gofit/const.dart';
 
 import '../Asset/profile_text_form_field.dart';

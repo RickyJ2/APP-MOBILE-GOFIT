@@ -170,7 +170,7 @@ class _BookingKelasViewState extends State<BookingKelasView> {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         );

@@ -12,6 +12,7 @@ class BookingKelas extends Equatable {
   final Member member;
   final JadwalHarian jadwalHarian;
   final bool isCanceled;
+  final bool isPresent;
   final String createdAt;
 
   BookingKelas copyWith({
@@ -20,6 +21,7 @@ class BookingKelas extends Equatable {
     Member? member,
     JadwalHarian? jadwalHarian,
     bool? isCanceled,
+    bool? isPresent,
     String? createdAt,
   }) {
     return BookingKelas(
@@ -28,6 +30,7 @@ class BookingKelas extends Equatable {
       member: member ?? this.member,
       jadwalHarian: jadwalHarian ?? this.jadwalHarian,
       isCanceled: isCanceled ?? this.isCanceled,
+      isPresent: isPresent ?? this.isPresent,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -37,6 +40,7 @@ class BookingKelas extends Equatable {
     this.noStruk = '',
     this.member = const Member(),
     this.jadwalHarian = const JadwalHarian(),
+    this.isPresent = false,
     this.isCanceled = false,
     this.createdAt = '',
   });
@@ -65,6 +69,7 @@ class BookingKelas extends Equatable {
           ),
         ),
       ),
+      isPresent: object['is_present'].toString() == '1' ? true : false,
       isCanceled: object['is_cancelled'].toString() == '1' ? true : false,
       createdAt: object['created_at'].toString(),
     );
@@ -81,6 +86,7 @@ class BookingKelas extends Equatable {
         noStruk,
         member,
         jadwalHarian,
+        isPresent,
         isCanceled,
         createdAt,
       ];
