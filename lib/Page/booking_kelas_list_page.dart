@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mobile_gofit/Bloc/BookingKelasGymBloc/BookingKelasListBloc/booking_kelas_list_bloc.dart';
 import 'package:mobile_gofit/Bloc/BookingKelasGymBloc/BookingKelasListBloc/booking_kelas_list_state.dart';
 import 'package:mobile_gofit/Repository/jadwal_harian_repository.dart';
@@ -50,19 +49,25 @@ class _BookingKelasListViewState extends State<BookingKelasListView> {
   Widget build(BuildContext context) {
     return BlocBuilder<BookingKelasListBloc, BookingKelasListState>(
         builder: (context, state) {
-      return Column(
-          children: state.jadwalHarian
-              .map(
-                (item) => TextButton(
-                  onPressed: () {
-                    Navigator.pop(context, item);
-                  },
-                  child: CardJadwalHarian(
-                    jadwalHarian: item,
-                  ),
-                ),
-              )
-              .toList());
+      return state.jadwalHarian.isEmpty
+          ? const Center(
+              child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text("Belum ada kelas tersedia"),
+            ))
+          : Column(
+              children: state.jadwalHarian
+                  .map(
+                    (item) => TextButton(
+                      onPressed: () {
+                        Navigator.pop(context, item);
+                      },
+                      child: CardJadwalHarian(
+                        jadwalHarian: item,
+                      ),
+                    ),
+                  )
+                  .toList());
     });
   }
 }

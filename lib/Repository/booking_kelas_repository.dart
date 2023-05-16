@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../Model/booking_kelas.dart';
@@ -25,6 +26,21 @@ class FailedToLoadBookingKelas implements Exception {
 }
 
 class BookingKelasRepository {
+  Future<List<BookingKelas>> show() async {
+    var token = await TokenBearer().get();
+    var url = Uri.parse('${uri}bookingKelas/show');
+    var response =
+        await http.get(url, headers: {'Authorization': 'Bearer $token'});
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body)['data'] as List;
+      List<BookingKelas> bookingKelas =
+          data.map((e) => BookingKelas.createBookingKelas(e)).toList();
+      return bookingKelas;
+    } else {
+      throw const HttpException('Failed to load Booking');
+    }
+  }
+
   Future<void> add(String id) async {
     var token = await TokenBearer().get();
     var url = Uri.parse('${uri}bookingKelas/add');
@@ -33,12 +49,31 @@ class BookingKelasRepository {
     }, body: {
       'jadwal_harian_id': id,
     });
+
     if (response.statusCode == 200) {
       return;
     } else if (response.statusCode == 400) {
       throw FailedToLoadBookingKelas(json.decode(response.body)['message']);
     } else {
       throw const HttpException('Failed to add Booking');
+    }
+  }
+
+  Future<void> cancel(String id) async {
+    var token = await TokenBearer().get();
+    var url = Uri.parse('${uri}bookingKelas/cancel');
+    var response = await http.post(url, headers: {
+      'Authorization': 'Bearer $token'
+    }, body: {
+      'id': id,
+    });
+    debugPrint(id);
+    if (response.statusCode == 200) {
+      return;
+    } else if (response.statusCode == 400) {
+      throw FailedToLoadBookingKelas(json.decode(response.body)['message']);
+    } else {
+      throw const HttpException('Failed to cancel Booking');
     }
   }
 }

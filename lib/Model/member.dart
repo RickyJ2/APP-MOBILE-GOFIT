@@ -75,11 +75,16 @@ class Member extends Equatable {
       noTelp: object['no_telp'].toString(),
       email: object['email'].toString(),
       username: object['username'].toString(),
-      deactivedMembershipAt: object['deactived_membership_at'].toString(),
+      deactivedMembershipAt:
+          object['deactived_membership_at'].toString() == 'null'
+              ? 'Belum Aktif'
+              : object['deactived_membership_at'].toString(),
       depositReguler: object['deposit_reguler'],
       depositKelasPaket: object['deposit_kelas_paket'],
       deactivedDepositKelasPaket:
-          object['deactived_deposit_kelas_paket'].toString(),
+          object['deactived_deposit_kelas_paket'].toString() == 'null'
+              ? 'Belum Aktif'
+              : object['deactived_deposit_kelas_paket'].toString(),
       kelasDepositKelasPaket: object['kelas_deposit_kelas_paket'].toString(),
     );
   }

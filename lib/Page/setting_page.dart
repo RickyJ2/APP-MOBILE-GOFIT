@@ -48,7 +48,7 @@ class SettingPage extends StatelessWidget {
                     title: (state.user.user as Member).username,
                     subtitle: (state.user.user as Member).email,
                     onTap: () {
-                      //context.push('/profile');
+                      context.push('/profile-member');
                     },
                   )
                 : const SizedBox(),
@@ -69,7 +69,7 @@ class SettingPage extends StatelessWidget {
                     title: (state.user.user as Instruktur).username,
                     subtitle: (state.user.user as Instruktur).nama,
                     onTap: () {
-                      //context.push('/profile');
+                      context.push('/profile-instruktur');
                     },
                   )
                 : const SizedBox(),
@@ -89,9 +89,7 @@ class SettingPage extends StatelessWidget {
                     ),
                     title: (state.user.user as Pegawai).username,
                     subtitle: "Manajer Operasional",
-                    onTap: () {
-                      //context.push('/profile');
-                    },
+                    haveTrailing: false,
                   )
                 : const SizedBox(),
             state.user.role == 3
@@ -161,6 +159,7 @@ class SettingPage extends StatelessWidget {
                 : Center(
                     child: ElevatedButton(
                       onPressed: () {
+                        context.read<AppBloc>().add(const AppLogouted());
                         context.go('/login');
                       },
                       child: Padding(

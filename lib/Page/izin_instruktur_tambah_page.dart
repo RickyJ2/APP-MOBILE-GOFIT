@@ -73,7 +73,7 @@ class _IzinInstrukturTambahViewState extends State<IzinInstrukturTambahView> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: initTime,
-      firstDate: DateTime.now().add(const Duration(days: 1)),
+      firstDate: DateTime.now(),
       lastDate: DateTime.now().add(const Duration(days: 365)),
     );
     if (picked != null) {

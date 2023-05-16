@@ -24,8 +24,19 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<AppBloc>(context).add(const AppOpened());
+  }
 
   @override
   Widget build(BuildContext context) {

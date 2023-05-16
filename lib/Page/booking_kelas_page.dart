@@ -82,9 +82,9 @@ class _BookingKelasViewState extends State<BookingKelasView> {
                       onPressed: () async {
                         context.read<BookingKelasBloc>().add(
                             BookingKelasJadwalHarianChanged(
-                                jadwalHarian:
-                                    (await context.push('/booking-kelas-list')
-                                        as JadwalHarian)));
+                                jadwalHarian: ((await context
+                                        .push('/booking-kelas-list') ??
+                                    JadwalHarian.empty) as JadwalHarian)));
                       },
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(

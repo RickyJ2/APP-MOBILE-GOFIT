@@ -150,7 +150,13 @@ class _HomeMemberViewState extends State<HomeMemberView> {
                       ),
                     ),
                     const SizedBox(height: 8.0),
-                    const ListJadwalHarianCard(),
+                    state.jadwalHarian.isEmpty
+                        ? const Center(
+                            child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Belum ada jadwal kelas minggu ini'),
+                          ))
+                        : const ListJadwalHarianCard(),
                   ],
                 );
         },

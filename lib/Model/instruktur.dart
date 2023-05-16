@@ -8,6 +8,7 @@ class Instruktur extends Equatable {
   final String noTelp;
   final String username;
   final String? password;
+  final int? akumulasiTerlambat;
 
   Instruktur copyWith({
     String? id,
@@ -17,6 +18,7 @@ class Instruktur extends Equatable {
     String? noTelp,
     String? username,
     String? password,
+    int? akumulasiTerlambat,
   }) {
     return Instruktur(
       id: id ?? this.id,
@@ -26,6 +28,7 @@ class Instruktur extends Equatable {
       noTelp: noTelp ?? this.noTelp,
       username: username ?? this.username,
       password: password ?? this.password,
+      akumulasiTerlambat: akumulasiTerlambat ?? this.akumulasiTerlambat,
     );
   }
 
@@ -37,17 +40,18 @@ class Instruktur extends Equatable {
     this.noTelp = '',
     this.username = '',
     this.password = '',
+    this.akumulasiTerlambat = 0,
   });
 
   factory Instruktur.createInstruktur(Map<String, dynamic> object) {
     return Instruktur(
-      id: object['id'].toString(),
-      nama: object['nama'].toString(),
-      alamat: object['alamat'].toString(),
-      tglLahir: object['tgl_lahir'].toString(),
-      noTelp: object['no_telp'].toString(),
-      username: object['username'].toString(),
-    );
+        id: object['id'].toString(),
+        nama: object['nama'].toString(),
+        alamat: object['alamat'].toString(),
+        tglLahir: object['tgl_lahir'].toString(),
+        noTelp: object['no_telp'].toString(),
+        username: object['username'].toString(),
+        akumulasiTerlambat: object['akumulasi_terlambat']);
   }
 
   static const empty = Instruktur(
@@ -58,11 +62,13 @@ class Instruktur extends Equatable {
     noTelp: '',
     username: '',
     password: '',
+    akumulasiTerlambat: 0,
   );
 
   bool get isEmpty => this == Instruktur.empty;
   bool get isNoEmpty => this != Instruktur.empty;
 
   @override
-  List<Object?> get props => [id, nama, alamat, tglLahir, noTelp, username];
+  List<Object?> get props =>
+      [id, nama, alamat, tglLahir, noTelp, username, akumulasiTerlambat];
 }

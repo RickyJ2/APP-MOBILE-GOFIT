@@ -19,6 +19,7 @@ class CreateTextFormField extends StatelessWidget {
   final Widget? prefix;
   final bool? enabled;
   final int? maxLines;
+  final bool? readOnly;
 
   const CreateTextFormField({
     super.key,
@@ -37,6 +38,7 @@ class CreateTextFormField extends StatelessWidget {
     this.enabled,
     this.prefix,
     this.maxLines,
+    this.readOnly,
   });
 
   @override
@@ -74,6 +76,7 @@ class CreateTextFormField extends StatelessWidget {
       obscureText: obscureText ?? false,
       enabled: enabled ?? true,
       maxLines: maxLines ?? 1,
+      readOnly: readOnly ?? false,
     );
   }
 }

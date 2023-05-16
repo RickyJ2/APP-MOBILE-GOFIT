@@ -70,6 +70,7 @@ class _BotttomNavigationBarPageState extends State<BotttomNavigationBarPage> {
                           }
                         case 1:
                           {
+                            context.go('/history-member', extra: 0);
                             break;
                           }
                         case 2:

@@ -1,4 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:mobile_gofit/Model/instruktur.dart';
+import 'package:mobile_gofit/Model/jadwal_umum.dart';
+import 'package:mobile_gofit/Model/kelas.dart';
 
 import 'jadwal_harian.dart';
 import 'member.dart';
@@ -9,6 +12,7 @@ class BookingKelas extends Equatable {
   final Member member;
   final JadwalHarian jadwalHarian;
   final bool isCanceled;
+  final String createdAt;
 
   BookingKelas copyWith({
     String? id,
@@ -16,6 +20,7 @@ class BookingKelas extends Equatable {
     Member? member,
     JadwalHarian? jadwalHarian,
     bool? isCanceled,
+    String? createdAt,
   }) {
     return BookingKelas(
       id: id ?? this.id,
@@ -23,6 +28,7 @@ class BookingKelas extends Equatable {
       member: member ?? this.member,
       jadwalHarian: jadwalHarian ?? this.jadwalHarian,
       isCanceled: isCanceled ?? this.isCanceled,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 
@@ -32,15 +38,35 @@ class BookingKelas extends Equatable {
     this.member = const Member(),
     this.jadwalHarian = const JadwalHarian(),
     this.isCanceled = false,
+    this.createdAt = '',
   });
 
-  factory BookingKelas.createMember(Map<String, dynamic> object) {
+  factory BookingKelas.createBookingKelas(Map<String, dynamic> object) {
     return BookingKelas(
-      id: object['id'],
-      noStruk: object['no_struk'],
-      member: Member.createMember(object['member']),
-      jadwalHarian: JadwalHarian.createJadwalHarian(object['jadwal_harian']),
-      isCanceled: object['is_canceled'],
+      id: object['id'].toString(),
+      noStruk: object['no_nota'].toString(),
+      member: Member(
+        id: object['member_id'].toString(),
+      ),
+      jadwalHarian: JadwalHarian(
+        id: object['jadwal_harian_id'].toString(),
+        tanggal: object['tanggal'].toString(),
+        status: object['jenis_status'],
+        instrukturPenganti: object['instruktur_penganti'],
+        jadwalUmum: JadwalUmum(
+          hari: object['hari'].toString(),
+          jamMulai: object['jam_mulai'].toString(),
+          instruktur: Instruktur(
+            nama: object['nama_instruktur'].toString(),
+          ),
+          kelas: Kelas(
+            nama: object['nama_kelas'].toString(),
+            harga: object['harga_kelas'].toString(),
+          ),
+        ),
+      ),
+      isCanceled: object['is_cancelled'].toString() == '1' ? true : false,
+      createdAt: object['created_at'].toString(),
     );
   }
 
@@ -56,5 +82,6 @@ class BookingKelas extends Equatable {
         member,
         jadwalHarian,
         isCanceled,
+        createdAt,
       ];
 }
