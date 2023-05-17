@@ -11,6 +11,8 @@ class JadwalHarian extends Equatable {
   final String status;
   final String instrukturPenganti;
   final int count;
+  final String jamMulai;
+  final String jamSelesai;
 
   JadwalHarian copyWith({
     String? id,
@@ -19,6 +21,8 @@ class JadwalHarian extends Equatable {
     String? status,
     String? instrukturPenganti,
     int? count,
+    String? jamMulai,
+    String? jamSelesai,
   }) {
     return JadwalHarian(
       id: id ?? this.id,
@@ -27,6 +31,8 @@ class JadwalHarian extends Equatable {
       status: status ?? this.status,
       instrukturPenganti: instrukturPenganti ?? this.instrukturPenganti,
       count: count ?? this.count,
+      jamMulai: jamMulai ?? this.jamMulai,
+      jamSelesai: jamSelesai ?? this.jamSelesai,
     );
   }
 
@@ -37,6 +43,8 @@ class JadwalHarian extends Equatable {
     this.status = '',
     this.instrukturPenganti = '',
     this.count = 0,
+    this.jamMulai = '',
+    this.jamSelesai = '',
   });
 
   factory JadwalHarian.createJadwalHarian(Map<String, dynamic> object) {
@@ -50,13 +58,15 @@ class JadwalHarian extends Equatable {
         instruktur: Instruktur(
           nama: object['nama_instruktur'].toString(),
         ),
-        jamMulai: object['jam_mulai'].toString(),
+        jamMulai: object['jam_mulai_kelas'].toString(),
         hari: object['hari'].toString(),
       ),
       tanggal: object['tanggal'].toString(),
       status: object['jenis_status'],
       instrukturPenganti: object['instruktur_penganti'],
       count: object['total_bookings'],
+      jamMulai: object['jam_mulai'] ?? '',
+      jamSelesai: object['jam_selesai'] ?? '',
     );
   }
 
@@ -67,6 +77,8 @@ class JadwalHarian extends Equatable {
     status: '',
     instrukturPenganti: '',
     count: 0,
+    jamMulai: '',
+    jamSelesai: '',
   );
 
   bool get isEmpty => this == JadwalHarian.empty;
@@ -80,5 +92,7 @@ class JadwalHarian extends Equatable {
         status,
         instrukturPenganti,
         count,
+        jamMulai,
+        jamSelesai,
       ];
 }
