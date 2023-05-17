@@ -26,8 +26,18 @@ class BookingKelasGymPage extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back_ios_new_rounded),
+            ),
+            backgroundColor: Colors.transparent,
+            foregroundColor: primaryColor,
+            elevation: 0,
             title: const Text("Tambah Booking"),
-            foregroundColor: textColor,
+            centerTitle: true,
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(

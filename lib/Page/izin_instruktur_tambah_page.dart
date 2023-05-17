@@ -124,8 +124,18 @@ class _IzinInstrukturTambahViewState extends State<IzinInstrukturTambahView> {
         return SafeArea(
           child: Scaffold(
             appBar: AppBar(
-              foregroundColor: textColor,
-              title: const Text("Tambah izin Instruktur"),
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back_ios_new_rounded),
+              ),
+              backgroundColor: Colors.transparent,
+              foregroundColor: primaryColor,
+              elevation: 0,
+              title: const Text("Tambah Izin Instruktur"),
+              centerTitle: true,
             ),
             body: state.pageFetchedDataState is PageFetchedDataLoading
                 ? const Center(

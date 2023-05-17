@@ -83,7 +83,7 @@ class _HistoryBookingKelasViewState extends State<HistoryBookingKelasView> {
                 )
               : state.bookingKelasList.isEmpty
                   ? const Center(
-                      child: Text('Member belum memiliki aktivitas'),
+                      child: Text('Member belum memiliki booking kelas'),
                     )
                   : const ListBookingKelasCard();
         },

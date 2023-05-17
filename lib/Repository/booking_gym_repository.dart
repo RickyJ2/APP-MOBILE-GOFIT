@@ -49,18 +49,17 @@ class BookingGymRepository {
       'sesi_gym_id': bookingGym.sesiGym.id.toString(),
       'tgl_booking': bookingGym.tanggal.toString(),
     });
-
     if (response.statusCode == 200) {
       return;
     } else if (response.statusCode == 400) {
       BookingGym bookingGym = const BookingGym();
       final decoded = json.decode(response.body)['message'];
-      if (decoded.containesKey('sesi_gym_id')) {
+      if (decoded.containsKey('sesi_gym_id')) {
         bookingGym = bookingGym.copyWith(
             sesiGym: bookingGym.sesiGym
                 .copyWith(id: decoded['sesi_gym_id'][0].toString()));
       }
-      if (decoded.containesKey('tgl_booking')) {
+      if (decoded.containsKey('tgl_booking')) {
         bookingGym =
             bookingGym.copyWith(tanggal: decoded['tgl_booking'][0].toString());
       }

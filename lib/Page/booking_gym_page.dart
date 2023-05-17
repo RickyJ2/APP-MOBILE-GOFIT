@@ -110,100 +110,102 @@ class _BookingGymViewState extends State<BookingGymView> {
         builder: (context, state) {
           return state.pageFetchedDataState is PageFetchedDataLoading
               ? const Center(child: CircularProgressIndicator())
-              : Form(
-                  child: Column(
-                    children: [
-                      CreateTextFormField(
-                        labelText: "Member",
-                        hintText: "Member",
-                        initialValue: (BlocProvider.of<AppBloc>(context)
-                                .state
-                                .user
-                                .user as Member)
-                            .nama,
-                        enabled: false,
-                      ),
-                      const SizedBox(height: 16),
-                      CreateTextFormField(
-                        controller: _tglBookingController,
-                        labelText: "Tanggal Booking",
-                        hintText: "Pilih tanggal booking",
-                        validator: (value) =>
-                            state.bookingGymError.tanggal == ''
-                                ? null
-                                : state.bookingGymError.tanggal,
-                        onTap: () => _selectDate(context),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            _selectDate(context);
-                          },
-                          icon: const Icon(Icons.calendar_today),
+              : SingleChildScrollView(
+                  child: Form(
+                    child: Column(
+                      children: [
+                        CreateTextFormField(
+                          labelText: "Member",
+                          hintText: "Member",
+                          initialValue: (BlocProvider.of<AppBloc>(context)
+                                  .state
+                                  .user
+                                  .user as Member)
+                              .nama,
+                          enabled: false,
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      CreateDropDownButton(
-                        label: "Sesi Gym",
-                        errorText: state.bookingGymError.sesiGym.id == ''
-                            ? null
-                            : state.bookingGymError.sesiGym.id,
-                        value: state.bookingGymForm.sesiGym,
-                        items: state.listSesiGym
-                            .map((e) => DropdownMenuItem(
-                                  value: e,
-                                  child:
-                                      Text('${e.jamMulai} - ${e.jamSelesai}'),
-                                ))
-                            .toList(),
-                        onChanged: (value) {
-                          context.read<BookingGymBloc>().add(
-                                BookingGymFormChanged(
-                                  bookingGym: state.bookingGymForm
-                                      .copyWith(sesiGym: value as SesiGym),
-                                ),
-                              );
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                      const SizedBox(height: 20.0),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            context
-                                .read<BookingGymBloc>()
-                                .add(BookingGymFormSubmitted());
-                          },
-                          child: Stack(
-                            children: [
-                              state.formSubmissionState is FormSubmitting
-                                  ? const Center(
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                Colors.white),
-                                      ),
-                                    )
-                                  : const SizedBox.shrink(),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 15),
-                                child: Text(
-                                  state.formSubmissionState is! FormSubmitting
-                                      ? 'Booking Gym'
-                                      : '',
-                                  style: TextStyle(
-                                    fontFamily: 'SchibstedGrotesk',
-                                    fontSize: 15,
-                                    color: textColor,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
+                        const SizedBox(height: 16),
+                        CreateTextFormField(
+                          controller: _tglBookingController,
+                          labelText: "Tanggal Booking",
+                          hintText: "Pilih tanggal booking",
+                          validator: (value) =>
+                              state.bookingGymError.tanggal == ''
+                                  ? null
+                                  : state.bookingGymError.tanggal,
+                          onTap: () => _selectDate(context),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              _selectDate(context);
+                            },
+                            icon: const Icon(Icons.calendar_today),
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 16),
+                        CreateDropDownButton(
+                          label: "Sesi Gym",
+                          errorText: state.bookingGymError.sesiGym.id == ''
+                              ? null
+                              : state.bookingGymError.sesiGym.id,
+                          value: state.bookingGymForm.sesiGym,
+                          items: state.listSesiGym
+                              .map((e) => DropdownMenuItem(
+                                    value: e,
+                                    child:
+                                        Text('${e.jamMulai} - ${e.jamSelesai}'),
+                                  ))
+                              .toList(),
+                          onChanged: (value) {
+                            context.read<BookingGymBloc>().add(
+                                  BookingGymFormChanged(
+                                    bookingGym: state.bookingGymForm
+                                        .copyWith(sesiGym: value as SesiGym),
+                                  ),
+                                );
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        const SizedBox(height: 20.0),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              context
+                                  .read<BookingGymBloc>()
+                                  .add(BookingGymFormSubmitted());
+                            },
+                            child: Stack(
+                              children: [
+                                state.formSubmissionState is FormSubmitting
+                                    ? const Center(
+                                        child: CircularProgressIndicator(
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  Colors.white),
+                                        ),
+                                      )
+                                    : const SizedBox.shrink(),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 15),
+                                  child: Text(
+                                    state.formSubmissionState is! FormSubmitting
+                                        ? 'Booking Gym'
+                                        : '',
+                                    style: TextStyle(
+                                      fontFamily: 'SchibstedGrotesk',
+                                      fontSize: 15,
+                                      color: textColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
         },

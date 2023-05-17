@@ -57,8 +57,18 @@ class _IzinInstrukturViewState extends State<IzinInstrukturView> {
           return SafeArea(
             child: Scaffold(
               appBar: AppBar(
-                foregroundColor: textColor,
+                automaticallyImplyLeading: false,
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                ),
+                backgroundColor: Colors.transparent,
+                foregroundColor: primaryColor,
+                elevation: 0,
                 title: const Text("Izin Instruktur"),
+                centerTitle: true,
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
