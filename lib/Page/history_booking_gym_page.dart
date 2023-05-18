@@ -203,7 +203,7 @@ class ListBookingGymCard extends StatelessWidget {
                     const SizedBox(height: 8.0),
                     Row(
                       children: [
-                        Icon(Icons.timer, color: primaryColor),
+                        Icon(Icons.schedule, color: primaryColor),
                         const SizedBox(
                           width: 8.0,
                         ),

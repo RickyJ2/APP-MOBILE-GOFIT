@@ -48,7 +48,6 @@ class BookingKelasRepository {
     }, body: {
       'jadwal_harian_id': id,
     });
-
     if (response.statusCode == 200) {
       return;
     } else if (response.statusCode == 400) {

@@ -55,10 +55,12 @@ class _HomeMOViewState extends State<HomeMOView> {
         if (state.jamMulaiUpdateRequestState is SubmissionSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Jam mulai berhasil diupdate')));
+          context.read<HomeMOBloc>().add(HomeMODataFetched());
         }
         if (state.jamSelesaiUpdateRequestState is SubmissionSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Jam selesai berhasil diupdate')));
+          context.read<HomeMOBloc>().add(HomeMODataFetched());
         }
         if (state.jamMulaiUpdateRequestState is SubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -168,7 +170,7 @@ class ListJadwalHarianCard extends StatelessWidget {
                             width: 8.0,
                           ),
                           Text(
-                            '${item.jamMulai == '' ? '--:--' : item.jamMulai} - ${item.jamSelesai == '' ? '--:--' : item.jamSelesai}',
+                            '${item.jamMulai == '' ? '--:--' : item.jamMulai} s/d ${item.jamSelesai == '' ? '--:--' : item.jamSelesai}',
                             style: TextStyle(
                                 color: accentColor,
                                 fontWeight: FontWeight.normal),
@@ -180,25 +182,28 @@ class ListJadwalHarianCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           ElevatedButton(
-                            onPressed: () {
-                              void jamMulai() {
-                                BlocProvider.of<HomeMOBloc>(context).add(
-                                    HomeMOJamMulaiUpdateRequested(id: item.id));
-                              }
+                            onPressed: item.jamMulai != ''
+                                ? null
+                                : () {
+                                    void jamMulai() {
+                                      BlocProvider.of<HomeMOBloc>(context).add(
+                                          HomeMOJamMulaiUpdateRequested(
+                                              id: item.id));
+                                    }
 
-                              showDialog(
-                                context: context,
-                                builder: (context) => ConfirmationDialog(
-                                  title: 'Update Jam Mulai Kelas',
-                                  message:
-                                      'Apakah anda yakin ingin mengupdate Jam Mulai kelas ${item.jadwalUmum.kelas.nama}?',
-                                  onYes: () {
-                                    Navigator.pop(context);
-                                    jamMulai();
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => ConfirmationDialog(
+                                        title: 'Update Jam Mulai Kelas',
+                                        message:
+                                            'Apakah anda yakin ingin mengupdate Jam Mulai kelas ${item.jadwalUmum.kelas.nama}?',
+                                        onYes: () {
+                                          Navigator.pop(context);
+                                          jamMulai();
+                                        },
+                                      ),
+                                    );
                                   },
-                                ),
-                              );
-                            },
                             child: Text(
                               "Jam Mulai",
                               style: TextStyle(color: textColor),
@@ -208,26 +213,29 @@ class ListJadwalHarianCard extends StatelessWidget {
                             width: 8.0,
                           ),
                           ElevatedButton(
-                            onPressed: () {
-                              void jamSelesai() {
-                                BlocProvider.of<HomeMOBloc>(context).add(
-                                    HomeMOJamSelesaiUpdateRequested(
-                                        id: item.id));
-                              }
+                            onPressed: item.jamMulai == '' ||
+                                    item.jamSelesai != ''
+                                ? null
+                                : () {
+                                    void jamSelesai() {
+                                      BlocProvider.of<HomeMOBloc>(context).add(
+                                          HomeMOJamSelesaiUpdateRequested(
+                                              id: item.id));
+                                    }
 
-                              showDialog(
-                                context: context,
-                                builder: (context) => ConfirmationDialog(
-                                  title: 'Update Jam Selesai Kelas',
-                                  message:
-                                      'Apakah anda yakin ingin mengupdate Jam Selesai kelas ${item.jadwalUmum.kelas.nama}?',
-                                  onYes: () {
-                                    Navigator.pop(context);
-                                    jamSelesai();
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => ConfirmationDialog(
+                                        title: 'Update Jam Selesai Kelas',
+                                        message:
+                                            'Apakah anda yakin ingin mengupdate Jam Selesai kelas ${item.jadwalUmum.kelas.nama}?',
+                                        onYes: () {
+                                          Navigator.pop(context);
+                                          jamSelesai();
+                                        },
+                                      ),
+                                    );
                                   },
-                                ),
-                              );
-                            },
                             child: Text(
                               "Jam Selesai",
                               style: TextStyle(color: textColor),

@@ -132,7 +132,7 @@ class SettingPage extends StatelessWidget {
               leading: const Icon(Icons.calendar_month),
               title: "Jadwal Umum",
               onTap: () {
-                //context.push('/change-password');
+                context.push('/jadwal-umum');
               },
             ),
             CreateListTileSetting(

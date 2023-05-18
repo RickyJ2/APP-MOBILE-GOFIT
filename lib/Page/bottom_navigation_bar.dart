@@ -130,6 +130,7 @@ class _BotttomNavigationBarPageState extends State<BotttomNavigationBarPage> {
                           }
                         case 1:
                           {
+                            context.go('/jadwal-umum-guest');
                             break;
                           }
                         case 2:

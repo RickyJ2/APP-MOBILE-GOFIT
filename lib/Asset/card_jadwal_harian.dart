@@ -86,7 +86,7 @@ class CardJadwalHarian extends StatelessWidget {
               Text(
                 jadwalHarian.instrukturPenganti.isEmpty
                     ? jadwalHarian.jadwalUmum.instruktur.nama
-                    : jadwalHarian.instrukturPenganti,
+                    : '${jadwalHarian.instrukturPenganti} (Mengantikan ${jadwalHarian.jadwalUmum.instruktur.nama})',
                 style: TextStyle(
                     color: accentColor, fontWeight: FontWeight.normal),
               ),

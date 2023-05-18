@@ -9,6 +9,7 @@ import 'package:mobile_gofit/Page/home_guest.dart';
 import 'package:mobile_gofit/Page/home_instruktur_page.dart';
 import 'package:mobile_gofit/Page/izin_instruktur_page.dart';
 import 'package:mobile_gofit/Page/izin_instruktur_tambah_page.dart';
+import 'package:mobile_gofit/Page/jadwal_umum_page.dart';
 import 'package:mobile_gofit/Page/profile_instruktur_page.dart';
 import 'package:mobile_gofit/Page/setting_page.dart';
 import 'Bloc/AppBloc/app_bloc.dart';
@@ -17,6 +18,7 @@ import 'Page/history_member.dart';
 import 'Page/home_member_page.dart';
 import 'Page/login_page.dart';
 import 'Page/profile_member_page.dart';
+import 'Repository/jadwal_umum_guest_page.dart';
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[
@@ -44,6 +46,10 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const BotttomNavigationBarPage(
           mainPageContent: HomeGuestPage(), selectedIndex: 0),
     ),
+    GoRoute(
+        path: '/jadwal-umum-guest',
+        builder: (context, state) => const BotttomNavigationBarPage(
+            mainPageContent: JadwalUmumGuestPage(), selectedIndex: 1)),
     GoRoute(
       path: '/history-member',
       builder: (context, state) => BotttomNavigationBarPage(
@@ -82,12 +88,17 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const BookingKelasListPage(),
     ),
     GoRoute(
-        path: '/izin-instruktur',
-        builder: (context, state) => const IzinInstrukturPage()),
+      path: '/izin-instruktur',
+      builder: (context, state) => const IzinInstrukturPage(),
+    ),
     GoRoute(
       path: '/izin-instruktur/tambah',
       builder: (context, state) => const IzinInstrukturTambahPage(),
-    )
+    ),
+    GoRoute(
+      path: '/jadwal-umum',
+      builder: (context, state) => const JadwalUmumPage(),
+    ),
   ],
   initialLocation: '/login',
 );

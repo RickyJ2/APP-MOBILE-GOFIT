@@ -9,7 +9,7 @@ class BookingGym extends Equatable {
   final String tanggal;
   final SesiGym sesiGym;
   final bool isCanceled;
-  final bool isPresent;
+  final String presentAt;
   final String createdAt;
 
   BookingGym copyWith({
@@ -19,7 +19,7 @@ class BookingGym extends Equatable {
     String? tanggal,
     SesiGym? sesiGym,
     bool? isCanceled,
-    bool? isPresent,
+    String? presentAt,
     String? createdAt,
   }) {
     return BookingGym(
@@ -29,7 +29,7 @@ class BookingGym extends Equatable {
       tanggal: tanggal ?? this.tanggal,
       sesiGym: sesiGym ?? this.sesiGym,
       isCanceled: isCanceled ?? this.isCanceled,
-      isPresent: isPresent ?? this.isPresent,
+      presentAt: presentAt ?? this.presentAt,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -40,7 +40,7 @@ class BookingGym extends Equatable {
     this.member = const Member(),
     this.tanggal = '',
     this.sesiGym = SesiGym.empty,
-    this.isPresent = false,
+    this.presentAt = '',
     this.isCanceled = false,
     this.createdAt = '',
   });
@@ -58,7 +58,9 @@ class BookingGym extends Equatable {
         jamMulai: object['jam_mulai'].toString(),
         jamSelesai: object['jam_selesai'].toString(),
       ),
-      isPresent: object['is_present'].toString() == '1' ? true : false,
+      presentAt: object['present_at'].toString() == 'null'
+          ? ''
+          : object['present_at'].toString(),
       isCanceled: object['is_cancelled'].toString() == '1' ? true : false,
       createdAt: object['created_at'].toString(),
     );
@@ -76,7 +78,7 @@ class BookingGym extends Equatable {
         tanggal,
         sesiGym,
         isCanceled,
-        isPresent,
+        presentAt,
         createdAt,
       ];
 }
