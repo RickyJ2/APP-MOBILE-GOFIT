@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_gofit/Bloc/HomeInstrukturBloc/home_instruktur_bloc.dart';
 import 'package:mobile_gofit/Repository/jadwal_harian_repository.dart';
@@ -143,12 +144,12 @@ class ListJadwalHarianCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       ElevatedButton(
-                        onPressed: () {
-                          // context.push('/booking-gym-kelas', extra: {
-                          //   'jadwalHarianSelected': item,
-                          //   'gymKelas': 1,
-                          // });
-                        },
+                        onPressed: item.jamMulai == ''
+                            ? null
+                            : () {
+                                context.push('/list-member-booking-kelas',
+                                    extra: item.id);
+                              },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 0),

@@ -128,3 +128,5 @@ final List<String> role = [
   'MO',
   'Guest',
 ];
+
+final List<String> presensi = ['Hadir', 'Tidak Hadir'];

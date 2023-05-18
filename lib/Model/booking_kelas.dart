@@ -53,12 +53,13 @@ class BookingKelas extends Equatable {
           : object['no_nota'].toString(),
       member: Member(
         id: object['member_id'].toString(),
+        nama: object['nama_member'].toString(),
       ),
       jadwalHarian: JadwalHarian(
         id: object['jadwal_harian_id'].toString(),
         tanggal: object['tanggal'].toString(),
-        status: object['jenis_status'],
-        instrukturPenganti: object['instruktur_penganti'],
+        status: object['jenis_status'].toString(),
+        instrukturPenganti: object['instruktur_penganti'].toString(),
         jadwalUmum: JadwalUmum(
           hari: object['hari'].toString(),
           jamMulai: object['jam_mulai'].toString(),

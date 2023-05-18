@@ -16,6 +16,7 @@ import 'Bloc/AppBloc/app_bloc.dart';
 import 'Page/bottom_navigation_bar.dart';
 import 'Page/history_member.dart';
 import 'Page/home_member_page.dart';
+import 'Page/list_member_booking_kelas_page.dart';
 import 'Page/login_page.dart';
 import 'Page/profile_member_page.dart';
 import 'Repository/jadwal_umum_guest_page.dart';
@@ -86,6 +87,11 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/booking-kelas-list',
       builder: (context, state) => const BookingKelasListPage(),
+    ),
+    GoRoute(
+      path: '/list-member-booking-kelas',
+      builder: (context, state) =>
+          ListMemberBookingKelasPage(jadwalHarianId: state.extra.toString()),
     ),
     GoRoute(
       path: '/izin-instruktur',
