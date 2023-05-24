@@ -30,7 +30,8 @@ class InformasiUmum extends Equatable {
   const InformasiUmum({
     this.nama = 'Gym GoFit',
     this.alamat = 'Jl. Centralpark No. 10 Yogyakarta',
-    this.deskripsi = 'Jl. Centralpark No. 10 Yogyakarta',
+    this.deskripsi =
+        'GoFit adalah studio kebugaran eksklusif di Yogyakarta dengan kelas terjadwal dan fasilitas mandiri. Anggota dapat memesan kelas melalui aplikasi, menggunakan alat-alat kebugaran secara mandiri, dan menikmati fasilitas seperti shower air hangat dan handuk. Aplikasi ini memungkinkan anggota mengelola keanggotaan, jadwal kelas, dan pembayaran dengan mudah.',
     this.biayaAktivasiMembership = 3000000,
     this.minDepositReguler = 500000,
     this.maxDepositKelasAwal = 0,

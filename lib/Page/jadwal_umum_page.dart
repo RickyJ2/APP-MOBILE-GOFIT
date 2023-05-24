@@ -93,7 +93,7 @@ class _JadwalUmumViewState extends State<JadwalUmumView> {
                   const Text('Pilih Hari'),
                   const SizedBox(height: 8),
                   CreateDropDownButton(
-                    value: day[0],
+                    value: state.dropDownDay,
                     items: day
                         .map(
                           (e) => DropdownMenuItem(value: e, child: Text(e)),

@@ -47,6 +47,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   void _onAppLogined(AppLogined event, Emitter<AppState> emit) async {
     try {
       emit(state.copyWith(authState: AppProgressing()));
+      if (state.informasiUmum.isEmpty) {
+        InformasiUmum informasiUmum = await informasiUmumRepository.get();
+        emit(state.copyWith(informasiUmum: informasiUmum));
+      }
       User user = await loginRepository.getUser();
       emit(state.copyWith(
           user: user, authenticated: true, authState: AppLoadedSuccess()));
@@ -82,6 +86,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       GuestModeRequested event, Emitter<AppState> emit) async {
     try {
       emit(state.copyWith(authState: AppProgressing()));
+      if (state.informasiUmum.isEmpty) {
+        InformasiUmum informasiUmum = await informasiUmumRepository.get();
+        emit(state.copyWith(informasiUmum: informasiUmum));
+      }
       emit(state.copyWith(
           user: const User(),
           authenticated: true,

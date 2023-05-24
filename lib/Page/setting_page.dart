@@ -139,7 +139,7 @@ class SettingPage extends StatelessWidget {
               leading: const Icon(Icons.info),
               title: "Info",
               onTap: () {
-                //context.push('/change-password');
+                context.push('/info-umum');
               },
             ),
             const SizedBox(height: 50),

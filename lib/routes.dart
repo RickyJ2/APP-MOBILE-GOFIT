@@ -16,6 +16,7 @@ import 'Bloc/AppBloc/app_bloc.dart';
 import 'Page/bottom_navigation_bar.dart';
 import 'Page/history_member.dart';
 import 'Page/home_member_page.dart';
+import 'Page/info_umum_page.dart';
 import 'Page/list_member_booking_kelas_page.dart';
 import 'Page/login_page.dart';
 import 'Page/profile_member_page.dart';
@@ -104,6 +105,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/jadwal-umum',
       builder: (context, state) => const JadwalUmumPage(),
+    ),
+    GoRoute(
+      path: '/info-umum',
+      builder: (context, state) => const InfoUmumPage(),
     ),
   ],
   initialLocation: '/login',
