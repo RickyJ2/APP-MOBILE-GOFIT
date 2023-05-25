@@ -40,6 +40,28 @@ class BookingKelasRepository {
     }
   }
 
+  Future<List<BookingKelas>> showFilter(
+      String startDate, String endDate) async {
+    var token = await TokenBearer().get();
+    var url = Uri.parse('${uri}bookingKelas/showFilter');
+    var response = await http.post(
+      url,
+      headers: {'Authorization': 'Bearer $token'},
+      body: {
+        'start_date': startDate,
+        'end_date': endDate,
+      },
+    );
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body)['data'] as List;
+      List<BookingKelas> bookingKelas =
+          data.map((e) => BookingKelas.createBookingKelas(e)).toList();
+      return bookingKelas;
+    } else {
+      throw const HttpException('Failed to load Booking');
+    }
+  }
+
   Future<List<BookingKelas>> getListMember(String id) async {
     var token = await TokenBearer().get();
     var url = Uri.parse('${uri}bookingKelas/getListMember/$id');

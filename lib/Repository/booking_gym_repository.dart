@@ -40,6 +40,27 @@ class BookingGymRepository {
     }
   }
 
+  Future<List<BookingGym>> showFilter(String startDate, String endDate) async {
+    var token = await TokenBearer().get();
+    var url = Uri.parse('${uri}bookingGym/showFilter');
+    var response = await http.post(
+      url,
+      headers: {'Authorization': 'Bearer $token'},
+      body: {
+        'start_date': startDate,
+        'end_date': endDate,
+      },
+    );
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body)['data'] as List;
+      List<BookingGym> bookingKelas =
+          data.map((e) => BookingGym.createBookingGym(e)).toList();
+      return bookingKelas;
+    } else {
+      throw const HttpException('Failed to load Booking');
+    }
+  }
+
   Future<void> add(BookingGym bookingGym) async {
     var token = await TokenBearer().get();
     var url = Uri.parse('${uri}bookingGym/add');

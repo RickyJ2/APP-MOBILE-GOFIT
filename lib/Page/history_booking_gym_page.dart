@@ -17,7 +17,8 @@ class HistoryBookingGymPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<HistoryMemberBookingGymBloc>(
       create: (context) => HistoryMemberBookingGymBloc(
-          bookingGymRepository: BookingGymRepository()),
+        bookingGymRepository: BookingGymRepository(),
+      ),
       child: const HistoryBookingGymView(),
     );
   }
@@ -31,12 +32,58 @@ class HistoryBookingGymView extends StatefulWidget {
 }
 
 class _HistoryBookingGymViewState extends State<HistoryBookingGymView> {
+  final TextEditingController _startDateController = TextEditingController();
+  final TextEditingController _endDateController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     context
         .read<HistoryMemberBookingGymBloc>()
         .add(HistoryMemberBookinGymFetchedRequested());
+    _startDateController.addListener(() {
+      _onDateChanged();
+    });
+    _endDateController.addListener(() {
+      _onDateChanged();
+    });
+  }
+
+  @override
+  void dispose() {
+    _startDateController.dispose();
+    _endDateController.dispose();
+    super.dispose();
+  }
+
+  void _onDateChanged() {
+    context.read<HistoryMemberBookingGymBloc>().add(
+          HistoryMemberBookingGymDateChanged(
+            startDate: _startDateController.text,
+            endDate: _endDateController.text,
+          ),
+        );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime initTime = DateTime.now();
+    final DateTimeRange? picked = await showDateRangePicker(
+      context: context,
+      initialDateRange: DateTimeRange(
+        start: initTime,
+        end: initTime,
+      ),
+      firstDate: DateTime(2022),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null) {
+      DateTime startDate = picked.start;
+      DateTime endDate = picked.end;
+      _startDateController.text =
+          '${startDate.year.toString()}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}';
+      _endDateController.text =
+          '${endDate.year.toString()}-${endDate.month.toString().padLeft(2, '0')}-${endDate.day.toString().padLeft(2, '0')}';
+    }
   }
 
   @override
@@ -74,15 +121,57 @@ class _HistoryBookingGymViewState extends State<HistoryBookingGymView> {
       }),
       child: BlocBuilder<HistoryMemberBookingGymBloc,
           HistoryMemberBookingGymState>(builder: (context, state) {
-        return state.pageFetchedDataState is PageFetchedDataLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : state.bookingGymList.isEmpty
+        return Column(
+          children: [
+            Row(
+              children: [
+                IconButton(
+                  tooltip: 'Pilih tanggal',
+                  onPressed: state.bookingGymList.isEmpty &&
+                          state.startDate == '' &&
+                          state.endDate == ''
+                      ? null
+                      : () {
+                          _selectDate(context);
+                        },
+                  icon: const Icon(Icons.calendar_today),
+                  color: primaryColor,
+                ),
+                Expanded(
+                  child: TextFormField(
+                    controller: _startDateController,
+                    readOnly: true,
+                    decoration: const InputDecoration(
+                      hintText: 'Start Date',
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10.0),
+                const Text('to'),
+                const SizedBox(width: 10.0),
+                Expanded(
+                  child: TextFormField(
+                    controller: _endDateController,
+                    readOnly: true,
+                    decoration: const InputDecoration(
+                      hintText: 'End Date',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 30.0),
+            state.pageFetchedDataState is PageFetchedDataLoading
                 ? const Center(
-                    child: Text('Member belum memiliki booking gym'),
+                    child: CircularProgressIndicator(),
                   )
-                : const ListBookingGymCard();
+                : state.bookingGymList.isEmpty
+                    ? const Center(
+                        child: Text('Member belum memiliki booking gym'),
+                      )
+                    : const ListBookingGymCard(),
+          ],
+        );
       }),
     );
   }
@@ -125,7 +214,7 @@ class ListBookingGymCard extends StatelessWidget {
                           style: const TextStyle(
                             fontFamily: 'SchibstedGrotesk',
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: 14,
                           ),
                         ),
                         const Spacer(),

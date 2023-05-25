@@ -10,12 +10,13 @@ class HomeInstrukturState {
     this.pageFetchedDataState = const InitialPageFetchedDataState(),
   });
 
-  HomeInstrukturState copyWith(
-      {List<JadwalHarian>? jadwalHarian,
-      PageFetchedDataState? pageFetchedDataState}) {
+  HomeInstrukturState copyWith({
+    List<JadwalHarian>? jadwalHarian,
+    PageFetchedDataState? pageFetchedDataState,
+  }) {
     return HomeInstrukturState(
-        jadwalHarian: jadwalHarian ?? this.jadwalHarian,
-        pageFetchedDataState:
-            pageFetchedDataState ?? this.pageFetchedDataState);
+      jadwalHarian: jadwalHarian ?? this.jadwalHarian,
+      pageFetchedDataState: pageFetchedDataState ?? this.pageFetchedDataState,
+    );
   }
 }

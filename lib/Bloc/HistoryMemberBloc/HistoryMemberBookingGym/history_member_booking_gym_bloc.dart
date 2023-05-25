@@ -17,6 +17,8 @@ class HistoryMemberBookingGymBloc
         _onHistoryMemberBookinGymFetchedRequested(event, emit));
     on<CancelBookingGymRequested>(
         (event, emit) => _onCancelBookingGymRequested(event, emit));
+    on<HistoryMemberBookingGymDateChanged>(
+        (event, emit) => _onHistoryMemberDateChanged(event, emit));
   }
 
   void _onHistoryMemberBookinGymFetchedRequested(
@@ -26,7 +28,13 @@ class HistoryMemberBookingGymBloc
         pageFetchedDataState: PageFetchedDataLoading(),
         cancelBookingGymState: const InitialFormState()));
     try {
-      List<BookingGym> bookingGymList = await bookingGymRepository.show();
+      List<BookingGym> bookingGymList = [];
+      if (state.startDate == '' && state.endDate == '') {
+        bookingGymList = await bookingGymRepository.show();
+      } else {
+        bookingGymList = await bookingGymRepository.showFilter(
+            state.startDate, state.endDate);
+      }
       emit(state.copyWith(
         bookingGymList: bookingGymList,
         pageFetchedDataState: PageFetchedDataSuccess(bookingGymList),
@@ -54,5 +62,17 @@ class HistoryMemberBookingGymBloc
       emit(state.copyWith(
           cancelBookingGymState: SubmissionFailed(e.toString())));
     }
+  }
+
+  void _onHistoryMemberDateChanged(HistoryMemberBookingGymDateChanged event,
+      Emitter<HistoryMemberBookingGymState> emit) async {
+    if (event.startDate == state.startDate && event.endDate == state.endDate) {
+      return;
+    }
+    emit(state.copyWith(
+      startDate: event.startDate,
+      endDate: event.endDate,
+    ));
+    add(HistoryMemberBookinGymFetchedRequested());
   }
 }

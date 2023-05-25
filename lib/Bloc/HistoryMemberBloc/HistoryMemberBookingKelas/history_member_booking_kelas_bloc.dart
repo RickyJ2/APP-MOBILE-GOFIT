@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_gofit/Bloc/HistoryMemberBloc/HistoryMemberBookingKelas/history_member_booking_kelas_event.dart';
 import 'package:mobile_gofit/Bloc/HistoryMemberBloc/HistoryMemberBookingKelas/history_member_booking_kelas_state.dart';
@@ -16,6 +17,8 @@ class HistoryMemberBookingKelasBloc extends Bloc<HistoryMemberBookingKelasEvent,
         (event, emit) => _onHistoryMemberPageFetchedRequested(event, emit));
     on<CancelBookingKelasRequested>(
         (event, emit) => _onCancelBookingKelasRequested(event, emit));
+    on<HistoryMemberBookingKelasDateChanged>(
+        (event, emit) => _onHistoryMemberDateChanged(event, emit));
   }
 
   void _onHistoryMemberPageFetchedRequested(
@@ -25,7 +28,13 @@ class HistoryMemberBookingKelasBloc extends Bloc<HistoryMemberBookingKelasEvent,
         pageFetchedDataState: PageFetchedDataLoading(),
         cancelBookingKelasState: const InitialFormState()));
     try {
-      List<BookingKelas> bookingKelasList = await bookingKelasRepository.show();
+      List<BookingKelas> bookingKelasList = [];
+      if (state.startDate == '' && state.endDate == '') {
+        bookingKelasList = await bookingKelasRepository.show();
+      } else {
+        bookingKelasList = await bookingKelasRepository.showFilter(
+            state.startDate, state.endDate);
+      }
       emit(state.copyWith(
         bookingKelasList: bookingKelasList,
         pageFetchedDataState: PageFetchedDataSuccess(bookingKelasList),
@@ -34,8 +43,9 @@ class HistoryMemberBookingKelasBloc extends Bloc<HistoryMemberBookingKelasEvent,
       emit(state.copyWith(
           pageFetchedDataState: PageFetchedDataFailed(e.message)));
     } catch (e) {
+      debugPrint(e.toString());
       emit(state.copyWith(
-          cancelBookingKelasState: SubmissionFailed(e.toString())));
+          pageFetchedDataState: PageFetchedDataFailed(e.toString())));
     }
   }
 
@@ -54,5 +64,17 @@ class HistoryMemberBookingKelasBloc extends Bloc<HistoryMemberBookingKelasEvent,
       emit(state.copyWith(
           cancelBookingKelasState: SubmissionFailed(e.toString())));
     }
+  }
+
+  void _onHistoryMemberDateChanged(HistoryMemberBookingKelasDateChanged event,
+      Emitter<HistoryMemberBookingKelasState> emit) {
+    if (event.startDate == state.startDate && event.endDate == state.endDate) {
+      return;
+    }
+    emit(state.copyWith(
+      startDate: event.startDate,
+      endDate: event.endDate,
+    ));
+    add(HistoryMemberPageFetchedRequested());
   }
 }

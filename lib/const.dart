@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 //url Utama Repository
-String uri = 'http://192.168.0.105:5000/api/';
+String uri = 'http://192.168.0.102:5000/api/';
 
 //Theme
 Color primaryColor = const Color(0xFFFB8B24);
@@ -130,3 +130,27 @@ final List<String> role = [
 ];
 
 final List<String> presensi = ['Hadir', 'Tidak Hadir'];
+
+final List<String> bulan = [
+  '',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8 ',
+  '9',
+  '10',
+  '11',
+  '12',
+];
+
+int currentYear = DateTime.now().year;
+List<String> yearList = List.generate(currentYear - 2021, (index) {
+  if (index == 0) {
+    return '';
+  }
+  return (2021 + index).toString();
+});

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobile_gofit/Model/jadwal_harian.dart';
 import '../const.dart';
@@ -16,6 +17,37 @@ class JadwalHarianRepository {
     var url = Uri.parse('${uri}jadwalHarian/indexThisWeek');
     var response =
         await http.get(url, headers: {'Authorization': 'Bearer $token'});
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body)['data'] as List;
+      List<JadwalHarian> jadwalHarian =
+          data.map((e) => JadwalHarian.createJadwalHarian(e)).toList();
+      return jadwalHarian;
+    } else {
+      throw FailedToLoadJadwalHarian('Failed to load jadwal harian');
+    }
+  }
+
+  Future<List<JadwalHarian>> show() async {
+    var token = await TokenBearer().get();
+    var url = Uri.parse('${uri}jadwalHarian/show');
+    var response =
+        await http.get(url, headers: {'Authorization': 'Bearer $token'});
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body)['data'] as List;
+      List<JadwalHarian> jadwalHarian =
+          data.map((e) => JadwalHarian.createJadwalHarian(e)).toList();
+      return jadwalHarian;
+    } else {
+      throw FailedToLoadJadwalHarian('Failed to load jadwal harian');
+    }
+  }
+
+  Future<List<JadwalHarian>> showFilter(String year, String month) async {
+    var token = await TokenBearer().get();
+    var url = Uri.parse('${uri}jadwalHarian/showFilter/$year/$month');
+    var response =
+        await http.get(url, headers: {'Authorization': 'Bearer $token'});
+    debugPrint(response.body);
     if (response.statusCode == 200) {
       var data = json.decode(response.body)['data'] as List;
       List<JadwalHarian> jadwalHarian =

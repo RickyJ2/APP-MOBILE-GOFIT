@@ -4,6 +4,7 @@ import 'package:mobile_gofit/Model/jadwal_harian.dart';
 import 'package:mobile_gofit/Page/booking_kelas_gym_page.dart';
 import 'package:mobile_gofit/Page/booking_kelas_list_page.dart';
 import 'package:mobile_gofit/Page/change_password_page.dart';
+import 'package:mobile_gofit/Page/history_instruktur_page.dart';
 import 'package:mobile_gofit/Page/home_mo.dart';
 import 'package:mobile_gofit/Page/home_guest.dart';
 import 'package:mobile_gofit/Page/home_instruktur_page.dart';
@@ -57,6 +58,11 @@ final GoRouter router = GoRouter(
       builder: (context, state) => BotttomNavigationBarPage(
           mainPageContent: HistoryMemberPage(gymKelas: (state.extra as int)),
           selectedIndex: 1),
+    ),
+    GoRoute(
+      path: '/history-instruktur',
+      builder: (context, state) => const BotttomNavigationBarPage(
+          mainPageContent: HistoryInstrukturPage(), selectedIndex: 1),
     ),
     GoRoute(
       path: '/setting',
