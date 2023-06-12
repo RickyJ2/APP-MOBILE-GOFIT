@@ -151,9 +151,9 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
+    return const Form(
       child: Column(
-        children: const [
+        children: [
           UsernameTextFormField(),
           SizedBox(height: 10),
           PasswordTextFormField(),

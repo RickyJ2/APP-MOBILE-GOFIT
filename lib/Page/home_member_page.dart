@@ -66,7 +66,7 @@ class _HomeMemberViewState extends State<HomeMemberView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Halo, ${(context.read<AppBloc>().state.user.user as Member).username}!',
+                              'Halo, ${(context.read<AppBloc>().state.user.user as Member).nama}!',
                               style: TextStyle(
                                 color: accentColor,
                                 fontFamily: 'roboto',
@@ -90,7 +90,7 @@ class _HomeMemberViewState extends State<HomeMemberView> {
                           radius: 15,
                           child: Text(
                             (context.read<AppBloc>().state.user.user as Member)
-                                .username[0],
+                                .nama[0],
                             style: TextStyle(
                                 fontFamily: 'SchibstedGrotesk',
                                 color: textColor,

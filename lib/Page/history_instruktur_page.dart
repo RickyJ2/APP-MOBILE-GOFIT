@@ -266,6 +266,15 @@ class ListAktivitasInstrukturCard extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 5.0),
+                      item.jamMulai != '' && item.jamSelesai != ''
+                          ? Text(
+                              "Kelas dimulai ${item.jamMulai} dan berakhir ${item.jamSelesai}",
+                              style: TextStyle(
+                                  color: accentColor,
+                                  fontWeight: FontWeight.normal),
+                            )
+                          : Container(),
+                      const SizedBox(height: 5.0),
                     ],
                   ),
                 ),

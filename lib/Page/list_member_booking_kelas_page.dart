@@ -119,7 +119,8 @@ class _ListMemberBookingKelasViewState
                                         color: textColor,
                                       ),
                                     ),
-                                    dataRowHeight: 80,
+                                    dataRowMinHeight: 80,
+                                    dataRowMaxHeight: 100,
                                     columns: const [
                                       DataColumn(
                                         label: Expanded(

@@ -37,7 +37,7 @@ class SettingPage extends StatelessWidget {
                       backgroundColor: primaryColor,
                       radius: 20,
                       child: Text(
-                        (state.user.user as Member).username[0],
+                        (state.user.user as Member).nama[0],
                         style: TextStyle(
                             fontFamily: 'SchibstedGrotesk',
                             color: textColor,
@@ -45,7 +45,7 @@ class SettingPage extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    title: (state.user.user as Member).username,
+                    title: (state.user.user as Member).nama,
                     subtitle: (state.user.user as Member).email,
                     onTap: () {
                       context.push('/profile-member');

@@ -59,14 +59,13 @@ class ChangePasswordPage extends StatelessWidget {
               title: const Text("Ubah Password"),
               centerTitle: true,
             ),
-            body: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+            body: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     SizedBox(height: 20),
                     ChangePasswordForm(),
                   ],
@@ -90,9 +89,9 @@ class ChangePasswordForm extends StatefulWidget {
 class _ChangePasswordFormState extends State<ChangePasswordForm> {
   @override
   Widget build(BuildContext context) {
-    return Form(
+    return const Form(
       child: Column(
-        children: const [
+        children: [
           OldPasswordTextFormField(),
           SizedBox(height: 20),
           NewPasswordTextFormField(),

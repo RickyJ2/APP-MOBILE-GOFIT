@@ -63,6 +63,9 @@ class HistoryInstrukturBloc
     if (state.tahunSelected == '') {
       emit(state.copyWith(tahunError: 'Tahun tidak boleh kosong'));
     }
+    if (state.bulanError != '' || state.tahunError != '') {
+      return;
+    }
     try {
       List<JadwalHarian> jadwalHarianList = await jadwalHarianRepository
           .showFilter(state.tahunSelected, state.bulanSelected);

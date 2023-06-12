@@ -41,7 +41,7 @@ class ProfileMemberPage extends StatelessWidget {
                     backgroundColor: primaryColor,
                     radius: 40,
                     child: Text(
-                      (state.user.user as Member).username[0],
+                      (state.user.user as Member).nama[0],
                       style: TextStyle(
                           fontFamily: 'SchibstedGrotesk',
                           color: textColor,

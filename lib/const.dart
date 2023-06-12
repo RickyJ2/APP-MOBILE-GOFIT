@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 //url Utama Repository
-String uri = 'http://192.168.0.102:5000/api/';
+String uri = 'https://restapi-web-gofit-production.up.railway.app/api/';
 
 //Theme
 Color primaryColor = const Color(0xFFFB8B24);
@@ -129,7 +129,7 @@ final List<String> role = [
   'Guest',
 ];
 
-final List<String> presensi = ['Hadir', 'Tidak Hadir'];
+final List<String> presensi = ['Hadir', 'Tidak'];
 
 final List<String> bulan = [
   '',
@@ -152,5 +152,5 @@ List<String> yearList = List.generate(currentYear - 2021, (index) {
   if (index == 0) {
     return '';
   }
-  return (2021 + index).toString();
+  return (2022 + index).toString();
 });

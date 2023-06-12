@@ -311,6 +311,20 @@ class ListBookingGymCard extends StatelessWidget {
                           color: accentColor, fontWeight: FontWeight.normal),
                     ),
                     const SizedBox(height: 8.0),
+                    item.isCanceled ||
+                            DateTime.now()
+                                    .compareTo(DateTime.parse(item.tanggal)) >
+                                0
+                        ? Text(
+                            item.presentAt == ''
+                                ? 'Tidak hadir'
+                                : "Presensi pada ${item.presentAt}",
+                            style: TextStyle(
+                                color: accentColor,
+                                fontWeight: FontWeight.normal),
+                          )
+                        : const SizedBox(),
+                    const SizedBox(height: 8.0),
                   ],
                 ),
               ),

@@ -328,6 +328,18 @@ class ListBookingKelasCard extends StatelessWidget {
                           color: accentColor, fontWeight: FontWeight.normal),
                     ),
                     const SizedBox(height: 8.0),
+                    item.isCanceled ||
+                            DateTime.now().compareTo(
+                                    DateTime.parse(item.jadwalHarian.tanggal)) >
+                                0
+                        ? Text(
+                            "Dibayar menggunakan ${item.jenisPembayaran.toString()}",
+                            style: TextStyle(
+                                color: accentColor,
+                                fontWeight: FontWeight.normal),
+                          )
+                        : const SizedBox(),
+                    const SizedBox(height: 8.0),
                   ],
                 ),
               ),
