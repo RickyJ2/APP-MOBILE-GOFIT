@@ -2,7 +2,7 @@
     package="com.example.mobile_gofit">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="mobile_gofit"
+        android:label="GoFit"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
